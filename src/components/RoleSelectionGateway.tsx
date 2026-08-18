@@ -5,9 +5,10 @@ import { PortalType } from '../types';
 
 interface RoleSelectionGatewayProps {
   onSelectPortal: (portal: PortalType) => void;
+  onOpenStaticPage: (page: string) => void;
 }
 
-export const RoleSelectionGateway: React.FC<RoleSelectionGatewayProps> = ({ onSelectPortal }) => {
+export const RoleSelectionGateway: React.FC<RoleSelectionGatewayProps> = ({ onSelectPortal, onOpenStaticPage }) => {
   return (
     <div id="role-selection-gateway" className="min-h-screen bg-slate-50 text-slate-900 flex flex-col justify-between font-sans selection:bg-blue-100 selection:text-blue-900">
       {/* Official Top Utility Bar */}
@@ -210,10 +211,10 @@ export const RoleSelectionGateway: React.FC<RoleSelectionGatewayProps> = ({ onSe
             <span className="font-bold text-white">CivicFlow AI</span> • Ministry of Housing and Urban Affairs Smart Governance Initiative
           </div>
           <div className="flex items-center gap-4 text-slate-400 text-[11px]">
-            <span>Privacy Policy</span>
-            <span>Terms of Service</span>
-            <span>Accessibility</span>
-            <span>Help Desk</span>
+            <span className="cursor-pointer hover:text-slate-300" onClick={() => onOpenStaticPage('Privacy Policy')}>Privacy Policy</span>
+            <span className="cursor-pointer hover:text-slate-300" onClick={() => onOpenStaticPage('Terms of Service')}>Terms of Service</span>
+            <span className="cursor-pointer hover:text-slate-300" onClick={() => onOpenStaticPage('Accessibility')}>Accessibility</span>
+            <span className="cursor-pointer hover:text-slate-300" onClick={() => onOpenStaticPage('Help Desk')}>Help Desk</span>
           </div>
         </div>
       </footer>
