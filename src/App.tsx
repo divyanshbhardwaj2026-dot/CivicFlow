@@ -24,6 +24,7 @@ import { ComplaintDetailModal } from './components/CitizenPortal/ComplaintDetail
 import { AdminDashboard } from './components/AdminPortal/AdminDashboard';
 import { IncidentClusterDetailModal } from './components/AdminPortal/IncidentClusterDetailModal';
 import { RealtimeToast } from './components/RealtimeToast';
+import { StaticPageModal } from './components/StaticPageModal';
 
 export default function App() {
   // Navigation & Role State
@@ -45,6 +46,7 @@ export default function App() {
   const [clusterMembers, setClusterMembers] = useState<Complaint[]>([]);
   const [toastEvent, setToastEvent] = useState<SSEEvent | null>(null);
   const [isSimulating, setIsSimulating] = useState(false);
+  const [openStaticPage, setOpenStaticPage] = useState<string | null>(null);
 
   // Data Store
   const [complaints, setComplaints] = useState<Complaint[]>([]);
@@ -223,7 +225,7 @@ export default function App() {
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-blue-100 selection:text-blue-900">
       {/* 1. First Screen: Role Selection Gateway (if portal is not chosen yet) */}
       {!currentPortal ? (
-        <RoleSelectionGateway onSelectPortal={handleSelectPortal} />
+        <RoleSelectionGateway onSelectPortal={handleSelectPortal} onOpenStaticPage={setOpenStaticPage} />
       ) : (
         <>
           {/* Header Navigation */}
@@ -292,10 +294,10 @@ export default function App() {
                 <span className="font-bold text-white">CivicFlow AI</span> • National Smart Governance &amp; Grievance Redressal Network
               </div>
               <div className="flex items-center gap-4 text-slate-400 text-[11px]">
-                <span>Citizen Charter</span>
-                <span>Privacy &amp; Data Ethics</span>
-                <span>Open Data API</span>
-                <span>24x7 Help Desk</span>
+                <span className="cursor-pointer hover:text-slate-300" onClick={() => setOpenStaticPage('Citizen Charter')}>Citizen Charter</span>
+                <span className="cursor-pointer hover:text-slate-300" onClick={() => setOpenStaticPage('Privacy & Data Ethics')}>Privacy &amp; Data Ethics</span>
+                <span className="cursor-pointer hover:text-slate-300" onClick={() => setOpenStaticPage('Open Data API')}>Open Data API</span>
+                <span className="cursor-pointer hover:text-slate-300" onClick={() => setOpenStaticPage('24x7 Help Desk')}>24x7 Help Desk</span>
               </div>
             </div>
           </footer>
@@ -334,6 +336,10 @@ export default function App() {
             onSelectComplaint={c => setSelectedComplaint(c)}
           />
         </>
+      )}
+
+      {openStaticPage && (
+        <StaticPageModal pageType={openStaticPage} onClose={() => setOpenStaticPage(null)} />
       )}
     </div>
   );
