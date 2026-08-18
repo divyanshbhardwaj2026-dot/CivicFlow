@@ -1,0 +1,6 @@
+{
+  "name": "CivicFlow AI",
+  "description": "AI-powered multilingual civic grievance intelligence and routing platform with role-based Citizen and Administrator portals.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
